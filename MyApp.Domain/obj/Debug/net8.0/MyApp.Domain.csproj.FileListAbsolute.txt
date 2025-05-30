@@ -20,3 +20,4 @@ C:\Users\QW595ZG\Documents\CQRS.Practico\MyApp.Domain\obj\Debug\net8.0\MyApp.Dom
 C:\Users\QW595ZG\Documents\CQRS.Practico\MyApp.Domain\obj\Debug\net8.0\refint\MyApp.Domain.dll
 C:\Users\QW595ZG\Documents\CQRS.Practico\MyApp.Domain\obj\Debug\net8.0\MyApp.Domain.pdb
 C:\Users\QW595ZG\Documents\CQRS.Practico\MyApp.Domain\obj\Debug\net8.0\ref\MyApp.Domain.dll
+C:\Users\QW595ZG\Documents\CQRS.Practico\MyApp.Domain\obj\Debug\net8.0\MyApp.Domain.sourcelink.json

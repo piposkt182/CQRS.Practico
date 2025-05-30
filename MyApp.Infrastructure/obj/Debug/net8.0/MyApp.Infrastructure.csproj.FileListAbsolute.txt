@@ -32,3 +32,4 @@ C:\Users\QW595ZG\Documents\CQRS.Practico\MyApp.Infrastructure\obj\Debug\net8.0\M
 C:\Users\QW595ZG\Documents\CQRS.Practico\MyApp.Infrastructure\obj\Debug\net8.0\refint\MyApp.Infrastructure.dll
 C:\Users\QW595ZG\Documents\CQRS.Practico\MyApp.Infrastructure\obj\Debug\net8.0\MyApp.Infrastructure.pdb
 C:\Users\QW595ZG\Documents\CQRS.Practico\MyApp.Infrastructure\obj\Debug\net8.0\ref\MyApp.Infrastructure.dll
+C:\Users\QW595ZG\Documents\CQRS.Practico\MyApp.Infrastructure\obj\Debug\net8.0\MyApp.Infrastructure.sourcelink.json

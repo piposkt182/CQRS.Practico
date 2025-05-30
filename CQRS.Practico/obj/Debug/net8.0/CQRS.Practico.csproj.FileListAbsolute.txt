@@ -194,3 +194,4 @@ C:\Users\QW595ZG\Documents\CQRS.Practico\CQRS.Practico\obj\Debug\net8.0\staticwe
 C:\Users\QW595ZG\Documents\CQRS.Practico\CQRS.Practico\obj\Debug\net8.0\CQRS.Pra.3839A8D4.Up2Date
 C:\Users\QW595ZG\Documents\CQRS.Practico\CQRS.Practico\obj\Debug\net8.0\CQRS.Practico.genruntimeconfig.cache
 C:\Users\QW595ZG\Documents\CQRS.Practico\CQRS.Practico\obj\Debug\net8.0\ref\CQRS.Practico.dll
+C:\Users\QW595ZG\Documents\CQRS.Practico\CQRS.Practico\obj\Debug\net8.0\CQRS.Practico.sourcelink.json

@@ -28,3 +28,4 @@ C:\Users\QW595ZG\Documents\CQRS.Practico\MyApp.Application\obj\Debug\net8.0\MyAp
 C:\Users\QW595ZG\Documents\CQRS.Practico\MyApp.Application\obj\Debug\net8.0\refint\MyApp.Application.dll
 C:\Users\QW595ZG\Documents\CQRS.Practico\MyApp.Application\obj\Debug\net8.0\MyApp.Application.pdb
 C:\Users\QW595ZG\Documents\CQRS.Practico\MyApp.Application\obj\Debug\net8.0\ref\MyApp.Application.dll
+C:\Users\QW595ZG\Documents\CQRS.Practico\MyApp.Application\obj\Debug\net8.0\MyApp.Application.sourcelink.json
