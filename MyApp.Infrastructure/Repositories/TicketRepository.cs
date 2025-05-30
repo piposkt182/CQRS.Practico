@@ -27,5 +27,10 @@ namespace MyApp.Infrastructure.Repositories
         {
             _context.Tickets.Add(ticket);
         }
+
+        public void Update(Ticket ticket)
+        {
+            _context.Tickets.Update(ticket);
+        }
     }
 }

@@ -7,5 +7,6 @@ namespace MyApp.Domain.Interfaces
         Task<List<Ticket>> GetAllAsync();
         void Add(Ticket ticket);
         Task<Ticket> GetTicketByIdAsync(int codigo);
+        void Update(Ticket ticket);
     }
 }
