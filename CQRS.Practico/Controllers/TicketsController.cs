@@ -21,7 +21,7 @@ namespace CQRS.Practico.Controllers
             _commandHandler = commandHandler;
             _getTicketByIdqueryHandler = getTicketByIdqueryHandler;
         }
-
+        //Get all tickets
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
