@@ -8,9 +8,9 @@ namespace MyApp.Domain.Entities
     public class Ticket
     {
         public int Codigo { get; private set; }
-        public string NombreTicket { get; private set; }
-        public string DesignTicket { get; private set; }
-        public bool Timbrado { get; private set; }
+        public string NombreTicket { get; set; }
+        public string DesignTicket { get; set; }
+        public bool Timbrado { get; set; }
 
         private Ticket() { }
 
