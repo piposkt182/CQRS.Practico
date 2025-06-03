@@ -8,5 +8,6 @@ namespace MyApp.Domain.Interfaces
         void Add(Ticket ticket);
         Task<Ticket> GetTicketByIdAsync(int codigo);
         void Update(Ticket ticket);
+        Task DeleteTicket(int id); // New method
     }
 }
