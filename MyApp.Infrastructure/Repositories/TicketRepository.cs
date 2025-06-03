@@ -2,6 +2,8 @@
 using MyApp.Domain.Entities;
 using MyApp.Domain.Interfaces;
 using MyApp.Infrastructure.Context;
+using System.Collections.Generic; // For KeyNotFoundException
+using System.Threading.Tasks; // For Task
 
 namespace MyApp.Infrastructure.Repositories
 {
@@ -31,6 +33,17 @@ namespace MyApp.Infrastructure.Repositories
         public void Update(Ticket ticket)
         {
             _context.Tickets.Update(ticket);
+        }
+
+        // New method implementation
+        public async Task DeleteTicket(int id)
+        {
+            var ticket = await _context.Tickets.FindAsync(id);
+            if (ticket == null)
+            {
+                throw new KeyNotFoundException($"Ticket with ID {id} not found.");
+            }
+            _context.Tickets.Remove(ticket);
         }
     }
 }

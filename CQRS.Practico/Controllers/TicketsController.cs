@@ -17,19 +17,22 @@ namespace CQRS.Practico.Controllers
         private readonly IQueryHandler<GetTicketByIdQuery, TicketDto> _getTicketByIdqueryHandler;
         private readonly ICommandHandler<CreateTicketCommand> _commandHandler;
         private readonly ICommandHandler<UpdateTicketCommand> _updateCommandHandler;
+        private readonly ICommandHandler<DeleteTicketCommand> _deleteCommandHandler; // Added
 
         public TicketsController(
             IQueryHandler<GetAllTicketsQuery, IEnumerable<TicketDto>> queryHandler,
             ICommandHandler<CreateTicketCommand> commandHandler,
             IQueryHandler<GetTicketByIdQuery, TicketDto> getTicketByIdqueryHandler,
-            ICommandHandler<UpdateTicketCommand> updateCommandHandler)
+            ICommandHandler<UpdateTicketCommand> updateCommandHandler,
+            ICommandHandler<DeleteTicketCommand> deleteCommandHandler) // Added
         {
             _queryHandler = queryHandler;
             _commandHandler = commandHandler;
             _getTicketByIdqueryHandler = getTicketByIdqueryHandler;
             _updateCommandHandler = updateCommandHandler;
+            _deleteCommandHandler = deleteCommandHandler; // Added
         }
-        //Get all tickets
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -40,10 +43,16 @@ namespace CQRS.Practico.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTicketById(int id)
         {
-            var result = await _getTicketByIdqueryHandler.HandleAsync(new GetTicketByIdQuery(id));
-            return Ok(result);
+            try
+            {
+                var result = await _getTicketByIdqueryHandler.HandleAsync(new GetTicketByIdQuery(id));
+                return Ok(result);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateTicketCommand command)
@@ -82,6 +91,27 @@ namespace CQRS.Practico.Controllers
                 // Log the exception (implementation of logging is out of scope for this task)
                 // For example: _logger.LogError(ex, "Error updating ticket {TicketId}", command.Id);
                 return StatusCode(500, "An error occurred while updating the ticket.");
+            }
+        }
+
+        // New DELETE endpoint
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteTicket(int id)
+        {
+            try
+            {
+                var command = new DeleteTicketCommand(id);
+                await _deleteCommandHandler.HandleAsync(command);
+                return NoContent();
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound($"Ticket with ID {id} not found.");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (e.g., _logger.LogError(ex, "Error deleting ticket {TicketId}", id);)
+                return StatusCode(500, $"An error occurred while deleting the ticket with ID {id}.");
             }
         }
     }
