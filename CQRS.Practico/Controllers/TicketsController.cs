@@ -18,19 +18,22 @@ namespace CQRS.Practico.Controllers
         private readonly ICommandHandler<CreateTicketCommand> _commandHandler;
         private readonly ICommandHandler<UpdateTicketCommand> _updateCommandHandler;
         private readonly ICommandHandler<DeleteTicketCommand> _deleteCommandHandler; // Added
+        private readonly IQueryHandler<GetTimbradoTicketsQuery, IEnumerable<TicketDto>> _getTimbradoTicketsQueryHandler;
 
         public TicketsController(
             IQueryHandler<GetAllTicketsQuery, IEnumerable<TicketDto>> queryHandler,
             ICommandHandler<CreateTicketCommand> commandHandler,
             IQueryHandler<GetTicketByIdQuery, TicketDto> getTicketByIdqueryHandler,
             ICommandHandler<UpdateTicketCommand> updateCommandHandler,
-            ICommandHandler<DeleteTicketCommand> deleteCommandHandler) // Added
+            ICommandHandler<DeleteTicketCommand> deleteCommandHandler, // Added
+            IQueryHandler<GetTimbradoTicketsQuery, IEnumerable<TicketDto>> getTimbradoTicketsQueryHandler)
         {
             _queryHandler = queryHandler;
             _commandHandler = commandHandler;
             _getTicketByIdqueryHandler = getTicketByIdqueryHandler;
             _updateCommandHandler = updateCommandHandler;
             _deleteCommandHandler = deleteCommandHandler; // Added
+            _getTimbradoTicketsQueryHandler = getTimbradoTicketsQueryHandler;
         }
 
         [HttpGet]
@@ -113,6 +116,13 @@ namespace CQRS.Practico.Controllers
                 // Log the exception (e.g., _logger.LogError(ex, "Error deleting ticket {TicketId}", id);)
                 return StatusCode(500, $"An error occurred while deleting the ticket with ID {id}.");
             }
+        }
+
+        [HttpGet("timbrado")]
+        public async Task<IActionResult> GetTimbradoTickets()
+        {
+            var result = await _getTimbradoTicketsQueryHandler.HandleAsync(new GetTimbradoTicketsQuery(true));
+            return Ok(result);
         }
     }
 }

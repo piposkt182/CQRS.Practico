@@ -3,6 +3,7 @@ using MyApp.Domain.Entities;
 using MyApp.Domain.Interfaces;
 using MyApp.Infrastructure.Context;
 using System.Collections.Generic; // For KeyNotFoundException
+using System.Linq; // Added for Where()
 using System.Threading.Tasks; // For Task
 
 namespace MyApp.Infrastructure.Repositories
@@ -44,6 +45,11 @@ namespace MyApp.Infrastructure.Repositories
                 throw new KeyNotFoundException($"Ticket with ID {id} not found.");
             }
             _context.Tickets.Remove(ticket);
+        }
+
+        public async Task<List<Ticket>> GetTicketsByTimbradoAsync(bool timbrado)
+        {
+            return await _context.Tickets.Where(t => t.Timbrado == timbrado).ToListAsync();
         }
     }
 }

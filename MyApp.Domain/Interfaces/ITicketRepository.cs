@@ -9,5 +9,6 @@ namespace MyApp.Domain.Interfaces
         Task<Ticket> GetTicketByIdAsync(int codigo);
         void Update(Ticket ticket);
         Task DeleteTicket(int id); // New method
+        Task<List<Ticket>> GetTicketsByTimbradoAsync(bool timbrado);
     }
 }
