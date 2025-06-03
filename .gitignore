@@ -1,2 +1,6 @@
 #ignore carpeta vs
 .vs/
+
+# Ignorar archivos de compilación
+**/bin/
+**/obj/
