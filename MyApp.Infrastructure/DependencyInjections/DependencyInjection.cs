@@ -34,12 +34,14 @@ namespace MyApp.Infrastructure.DependencyInjections
             // Register Query Handlers
             services.AddScoped<IQueryHandler<GetAllTicketsQuery, IEnumerable<TicketDto>>, GetAllTicketsHandler>();
             services.AddTransient<IQueryHandler<GetTicketByIdQuery, TicketDto>, GetTicketByIdHandler>();
+            services.AddTransient<IQueryHandler<GetTimbradoTicketsQuery, IEnumerable<TicketDto>>, GetTimbradoTicketsHandler>();
 
             // Register Command Handlers
             services.AddScoped<ICommandHandler<CreateTicketCommand>, CreateTicketHandler>();
             services.AddTransient<ICommandHandler<UpdateTicketCommand>, UpdateTicketHandler>(); // Kept one Transient registration
             services.AddScoped<ICommandHandler<CreateSaleCommand>, CreateSaleHandler>();
             services.AddTransient<ICommandHandler<DeleteTicketCommand>, DeleteTicketCommandHandler>();
+
 
 
             return services;

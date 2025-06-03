@@ -118,7 +118,7 @@ namespace CQRS.Practico.Controllers
             }
         }
 
-        [HttpGet("timbrado")]
+        [HttpGet("Timbrado")]
         public async Task<IActionResult> GetTimbradoTickets()
         {
             var result = await _getTimbradoTicketsQueryHandler.HandleAsync(new GetTimbradoTicketsQuery(true));
