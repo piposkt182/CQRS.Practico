@@ -1,5 +1,4 @@
-﻿using MyApp.Application.Interfaces;
-using MyApp.Domain.Interfaces;
+﻿using MyApp.Domain.Interfaces; // Changed from MyApp.Application.Interfaces
 using MyApp.Infrastructure.Context;
 
 namespace MyApp.Infrastructure.Repositories
@@ -8,14 +7,18 @@ namespace MyApp.Infrastructure.Repositories
     {
         private readonly AppDbContext _context;
 
+        private IGenderRepository _genderRepository;
+        // Add other private repository fields here if converting others to lazy load
+
         public UnitOfWork(AppDbContext context)
         {
             _context = context;
         }
 
-        public ITicketRepository TicketRepository => new TicketRepository(_context);
-        public IProductRepository ProductRepository => new ProductRepository(_context);
-        public ISaleRepository SaleRepository => new SaleRepository(_context);
+        public IGenderRepository GenderRepository => _genderRepository ??= new GenderRepository(_context);
+        public ITicketRepository TicketRepository => new TicketRepository(_context); // Assuming this doesn't need to be lazy-loaded for now
+        public IProductRepository ProductRepository => new ProductRepository(_context); // Assuming this doesn't need to be lazy-loaded for now
+        public ISaleRepository SaleRepository => new SaleRepository(_context); // Assuming this doesn't need to be lazy-loaded for now
 
         public async Task<int> SaveChangesAsync()
         {

@@ -22,7 +22,8 @@ namespace MyApp.Infrastructure.DependencyInjections
             services.AddScoped<ITicketRepository, TicketRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ISaleRepository, SaleRepository>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>(); // UnitOfWork is part of Infrastructure in this setup
+            services.AddScoped<IGenderRepository, GenderRepository>(); // Added
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }
 
@@ -41,8 +42,7 @@ namespace MyApp.Infrastructure.DependencyInjections
             services.AddTransient<ICommandHandler<UpdateTicketCommand>, UpdateTicketHandler>(); // Kept one Transient registration
             services.AddScoped<ICommandHandler<CreateSaleCommand>, CreateSaleHandler>();
             services.AddTransient<ICommandHandler<DeleteTicketCommand>, DeleteTicketCommandHandler>();
-
-
+            services.AddTransient<ICommandHandler<CreateGenderCommand>, CreateGenderCommandHandler>(); // Added
 
             return services;
         }
