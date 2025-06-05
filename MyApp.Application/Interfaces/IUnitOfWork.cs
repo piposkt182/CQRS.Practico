@@ -7,6 +7,7 @@ namespace MyApp.Application.Interfaces
         ITicketRepository TicketRepository { get; }
         ISaleRepository SaleRepository { get; }
         IProductRepository ProductRepository { get; }
+        IGenderRepository GenderRepository { get; }
         Task<int> SaveChangesAsync();
     }
 }

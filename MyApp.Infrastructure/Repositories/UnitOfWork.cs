@@ -1,4 +1,5 @@
-﻿using MyApp.Domain.Interfaces; // Changed from MyApp.Application.Interfaces
+﻿using MyApp.Application.Interfaces;
+using MyApp.Domain.Interfaces; // Changed from MyApp.Application.Interfaces
 using MyApp.Infrastructure.Context;
 
 namespace MyApp.Infrastructure.Repositories

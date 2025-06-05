@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using MyApp.Application.Commands; // For CreateGenderCommand
-using MyApp.Application.Interfaces; // For ICommandHandler
+using MyApp.Application.Commands; 
+using MyApp.Application.Interfaces; 
 using System.Threading.Tasks;
 
 namespace CQRS.Practico.Controllers

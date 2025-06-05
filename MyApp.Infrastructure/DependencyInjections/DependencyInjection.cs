@@ -1,16 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using MyApp.Application.Interfaces;
 using MyApp.Domain.Interfaces;
-using MyApp.Infrastructure.Context;
 using MyApp.Infrastructure.Repositories;
-using MyApp.Application.Interfaces; // For ICommandHandler, UpdateTicketCommand (as generic arg)
-using MyApp.Application.Commands;   // For UpdateTicketHandler, CreateTicketHandler, CreateSaleHandler, DeleteTicketCommandHandler
-using MyApp.Application.Queries;    // For GetAllTicketsHandler, GetTicketByIdHandler, TicketDto, GetAllTicketsQuery, GetTicketByIdQuery
-using MyApp.Application.Validators; // For UpdateTicketCommandValidator
-using FluentValidation;             // For IValidator
-using System.Collections.Generic;   // For IEnumerable
+using MyApp.Application.Commands;   
+using MyApp.Application.Queries;    
+using MyApp.Application.Validators; 
+using FluentValidation;             
 
 namespace MyApp.Infrastructure.DependencyInjections
 {
