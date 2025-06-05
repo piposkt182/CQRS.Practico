@@ -6,6 +6,8 @@ using MyApp.Application.Commands;
 using MyApp.Application.Queries;    
 using MyApp.Application.Validators; 
 using FluentValidation;             
+using MyApp.Application.DTOs; // Add this using directive
+using System.Collections.Generic; // Add this using directive
 
 namespace MyApp.Infrastructure.DependencyInjections
 {
@@ -31,6 +33,8 @@ namespace MyApp.Infrastructure.DependencyInjections
             services.AddScoped<IQueryHandler<GetAllTicketsQuery, IEnumerable<TicketDto>>, GetAllTicketsHandler>();
             services.AddTransient<IQueryHandler<GetTicketByIdQuery, TicketDto>, GetTicketByIdHandler>();
             services.AddTransient<IQueryHandler<GetTimbradoTicketsQuery, IEnumerable<TicketDto>>, GetTimbradoTicketsHandler>();
+            // Add this line for the new gender query handler
+            services.AddScoped<IQueryHandler<GetAllGendersQuery, IEnumerable<GenderDto>>, GetAllGendersHandler>();
 
             // Register Command Handlers
             services.AddScoped<ICommandHandler<CreateTicketCommand>, CreateTicketHandler>();
