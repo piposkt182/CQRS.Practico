@@ -12,6 +12,7 @@ namespace MyApp.Infrastructure.Context
         public DbSet<Sale> Sales => Set<Sale>();
         public DbSet<SaleItem> SaleItems => Set<SaleItem>();
         public DbSet<Gender> Genders => Set<Gender>();
+        public DbSet<Lenguaje> Lenguajes => Set<Lenguaje>();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Ticket>()
