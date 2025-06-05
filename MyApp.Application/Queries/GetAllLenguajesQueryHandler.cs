@@ -26,7 +26,7 @@ namespace MyApp.Application.Queries
             var lenguajeDtos = lenguajes.Select(lenguaje => new LenguajeDto
             {
                 Id = lenguaje.Id,
-                Nombre = lenguaje.Nombre
+                Nombre = lenguaje.Name
             }).ToList();
 
             return lenguajeDtos;

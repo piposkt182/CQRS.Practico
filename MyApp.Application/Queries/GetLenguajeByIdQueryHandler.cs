@@ -31,7 +31,7 @@ namespace MyApp.Application.Queries
             return new LenguajeDto
             {
                 Id = lenguaje.Id,
-                Nombre = lenguaje.Nombre
+                Nombre = lenguaje.Name
             };
         }
     }

@@ -20,7 +20,7 @@ namespace MyApp.Application.Commands
         {
             var lenguaje = new Lenguaje
             {
-                Nombre = request.Nombre
+                Name = request.Name
             };
 
             await _unitOfWork.LenguajeRepository.AddAsync(lenguaje);
@@ -30,7 +30,7 @@ namespace MyApp.Application.Commands
             return new LenguajeDto
             {
                 Id = lenguaje.Id,
-                Nombre = lenguaje.Nombre
+                Nombre = lenguaje.Name
             };
 
             // Or if returning Id:
