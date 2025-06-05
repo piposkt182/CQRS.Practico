@@ -20,6 +20,7 @@ namespace MyApp.Infrastructure.DependencyInjections
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ISaleRepository, SaleRepository>();
             services.AddScoped<IGenderRepository, GenderRepository>(); // Added
+            services.AddScoped<ILenguajeRepository, LenguajeRepository>(); // New Repository
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }
@@ -42,6 +43,13 @@ namespace MyApp.Infrastructure.DependencyInjections
             services.AddScoped<ICommandHandler<CreateSaleCommand>, CreateSaleHandler>();
             services.AddTransient<ICommandHandler<DeleteTicketCommand>, DeleteTicketCommandHandler>();
             services.AddTransient<ICommandHandler<CreateGenderCommand>, CreateGenderCommandHandler>(); // Added
+
+            // MediatR style Handlers for Lenguaje (assuming MediatR will be fully integrated)
+            // If not, these would need to align with custom ICommandHandler/IQueryHandler,
+            // which might require changes to CreateLenguajeCommandHandler or ICommandHandler interface.
+            services.AddTransient<MediatR.IRequestHandler<CreateLenguajeCommand, LenguajeDto>, CreateLenguajeCommandHandler>();
+            services.AddTransient<MediatR.IRequestHandler<GetAllLenguajesQuery, IEnumerable<LenguajeDto>>, GetAllLenguajesQueryHandler>();
+            services.AddTransient<MediatR.IRequestHandler<GetLenguajeByIdQuery, LenguajeDto>, GetLenguajeByIdQueryHandler>();
 
             return services;
         }
