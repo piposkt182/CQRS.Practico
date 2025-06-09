@@ -4,8 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyApp.Domain.Entities
 {
-    [Table("Gender", Schema = "dbo")]
-    public class Gender
+    public class Language
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

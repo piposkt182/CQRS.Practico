@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyApp.Domain.Entities;
 
-namespace MyApp.Infrastructure.Context
+namespace MyApp.Infrastructure.ApplicationDbContext
 {
     public class AppDbContext : DbContext
     {
@@ -11,12 +11,55 @@ namespace MyApp.Infrastructure.Context
         public DbSet<Product> Products => Set<Product>();
         public DbSet<Sale> Sales => Set<Sale>();
         public DbSet<SaleItem> SaleItems => Set<SaleItem>();
+        public DbSet<Movie> Movies => Set<Movie>(); // Added Movie DbSet
         public DbSet<Gender> Genders => Set<Gender>();
-        public DbSet<Lenguaje> Lenguajes => Set<Lenguaje>();
+        public DbSet<Language> Languages => Set<Language>(); // Corrected typo: Lenguaje to Language
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder); // Added call to base method
+
             modelBuilder.Entity<Ticket>()
                 .HasKey(t => t.Codigo);
+
+            // Configure Movie entity
+            modelBuilder.Entity<Movie>(entity =>
+            {
+                entity.ToTable("Movies");
+                entity.HasKey(m => m.Id);
+                entity.Property(m => m.Id).ValueGeneratedOnAdd();
+                entity.Property(m => m.Name).IsRequired().HasMaxLength(100);
+                entity.Property(m => m.ReleaseDate).IsRequired();
+                entity.Property(m => m.Duration).IsRequired();
+                entity.Property(m => m.EndDate).IsRequired(false); // Configure EndDate as optional
+
+                entity.HasOne(m => m.Language)
+                    .WithMany(l => l.Movies)
+                    .HasForeignKey(m => m.LanguageId)
+                    .IsRequired();
+
+                entity.HasOne(m => m.Gender)
+                    .WithMany(g => g.Movies)
+                    .HasForeignKey(m => m.GenderId)
+                    .IsRequired();
+            });
+
+            // Configure Language entity
+            modelBuilder.Entity<Language>(entity =>
+            {
+                entity.ToTable("Languages");
+                entity.HasKey(l => l.Id);
+                entity.Property(l => l.Id).ValueGeneratedOnAdd();
+                entity.Property(l => l.Name).IsRequired().HasMaxLength(50);
+            });
+
+            // Configure Gender entity
+            // Relies on the [Table("Gender", Schema = "dbo")] attribute on the Gender entity for table name and schema.
+            modelBuilder.Entity<Gender>(entity =>
+            {
+                entity.HasKey(g => g.Id);
+                entity.Property(g => g.Id).ValueGeneratedOnAdd();
+                entity.Property(g => g.Name).IsRequired().HasMaxLength(50);
+            });
         }
     }
 }

@@ -1,9 +1,9 @@
-using Microsoft.EntityFrameworkCore; // Add this using directive
 using MyApp.Domain.Entities;
 using MyApp.Domain.Interfaces;
-using MyApp.Infrastructure.Context;
-using System.Collections.Generic; // Add this using directive
-using System.Threading.Tasks; // Add this using directive
+using MyApp.Infrastructure.ApplicationDbContext; // Corrected namespace
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MyApp.Infrastructure.Repositories
 {
@@ -16,15 +16,29 @@ namespace MyApp.Infrastructure.Repositories
             _context = context;
         }
 
+        public async Task<Gender> GetByIdAsync(int id)
+        {
+            return await _context.Genders.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<Gender>> GetAllAsync()
+        {
+            return await _context.Genders.ToListAsync();
+        }
+
         public async Task AddAsync(Gender gender)
         {
             await _context.Genders.AddAsync(gender);
         }
 
-        // Add this method
-        public async Task<IEnumerable<Gender>> GetAllAsync()
+        public void Update(Gender gender)
         {
-            return await _context.Genders.ToListAsync();
+            _context.Genders.Update(gender);
+        }
+
+        public void Remove(Gender gender)
+        {
+            _context.Genders.Remove(gender);
         }
     }
 }

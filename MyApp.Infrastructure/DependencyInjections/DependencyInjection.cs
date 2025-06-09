@@ -5,9 +5,12 @@ using MyApp.Infrastructure.Repositories;
 using MyApp.Application.Commands;   
 using MyApp.Application.Queries;    
 using MyApp.Application.Validators; 
-using FluentValidation;             
-using MyApp.Application.DTOs; // Add this using directive
-using System.Collections.Generic; // Add this using directive
+using FluentValidation;
+using MyApp.Application.DTOs;
+using System.Collections.Generic;
+using MediatR; // Ensured MediatR is used
+using MyApp.Application.Handlers.CommandHandlers; // For CreateMovieCommandHandler
+using MyApp.Application.Handlers.QueryHandlers;   // For Movie Query Handlers
 
 namespace MyApp.Infrastructure.DependencyInjections
 {
@@ -20,7 +23,8 @@ namespace MyApp.Infrastructure.DependencyInjections
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ISaleRepository, SaleRepository>();
             services.AddScoped<IGenderRepository, GenderRepository>(); // Added
-            services.AddScoped<ILenguajeRepository, LenguajeRepository>(); // New Repository
+            services.AddScoped<ILanguageRepository, LanguageRepository>(); // Corrected ILenguajeRepository to ILanguageRepository
+            services.AddScoped<IMovieRepository, MovieRepository>(); // Added IMovieRepository
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }
@@ -50,6 +54,11 @@ namespace MyApp.Infrastructure.DependencyInjections
             services.AddTransient<MediatR.IRequestHandler<CreateLenguajeCommand, LenguajeDto>, CreateLenguajeCommandHandler>();
             services.AddTransient<MediatR.IRequestHandler<GetAllLenguajesQuery, IEnumerable<LenguajeDto>>, GetAllLenguajesQueryHandler>();
             services.AddTransient<MediatR.IRequestHandler<GetLenguajeByIdQuery, LenguajeDto>, GetLenguajeByIdQueryHandler>();
+
+            // Movie Handlers
+            services.AddTransient<MediatR.IRequestHandler<MyApp.Application.Commands.CreateMovieCommand, int>, MyApp.Application.Handlers.CommandHandlers.CreateMovieCommandHandler>();
+            services.AddTransient<MediatR.IRequestHandler<MyApp.Application.Queries.GetAllMoviesQuery, System.Collections.Generic.IEnumerable<MyApp.Application.DTOs.MovieDto>>, MyApp.Application.Handlers.QueryHandlers.GetAllMoviesQueryHandler>();
+            services.AddTransient<MediatR.IRequestHandler<MyApp.Application.Queries.GetMovieByIdQuery, MyApp.Application.DTOs.MovieDto>, MyApp.Application.Handlers.QueryHandlers.GetMovieByIdQueryHandler>();
 
             return services;
         }
