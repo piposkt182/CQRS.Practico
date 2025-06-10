@@ -1,8 +1,10 @@
+using MediatR;
+using MyApp.Application.DTOs;
+
 namespace MyApp.Application.Queries
 {
-    public class GetAllMoviesQuery
+    public class GetAllMoviesQuery : IRequest<IEnumerable<MovieDto>>
     {
-        // This query currently requires no parameters.
-        // Pagination, filtering, or sorting parameters could be added here in the future.
+       
     }
 }

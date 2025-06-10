@@ -1,9 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using MyApp.Domain.Entities;
 using MyApp.Domain.Interfaces;
-using MyApp.Infrastructure.Context; // Corrected namespace
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using MyApp.Infrastructure.ApplicationDbContext;
+
 
 namespace MyApp.Infrastructure.Repositories
 {
@@ -16,21 +15,21 @@ namespace MyApp.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task AddAsync(Lenguaje lenguaje)
+        public async Task AddAsync(Language lenguaje)
         {
-            await _context.Lenguajes.AddAsync(lenguaje);
+            await _context.Languages.AddAsync(lenguaje);
             //SaveChangesAsync is typically called in a UnitOfWork or service layer
         }
 
-        public async Task<IEnumerable<Lenguaje>> GetAllAsync()
+        public async Task<IEnumerable<Language>> GetAllAsync()
         {
-            return await _context.Lenguajes.ToListAsync();
+            return await _context.Languages.ToListAsync();
         }
 
-        public async Task<Lenguaje> GetByIdAsync(int id)
+        public async Task<Language> GetByIdAsync(int id)
         {
 #pragma warning disable CS8603 // Possible null reference return.
-            return await _context.Lenguajes.FindAsync(id);
+            return await _context.Languages.FindAsync(id);
 #pragma warning restore CS8603 // Possible null reference return.
         }
     }

@@ -11,26 +11,26 @@ namespace MyApp.Infrastructure.ApplicationDbContext
         public DbSet<Product> Products => Set<Product>();
         public DbSet<Sale> Sales => Set<Sale>();
         public DbSet<SaleItem> SaleItems => Set<SaleItem>();
-        public DbSet<Movie> Movies => Set<Movie>(); // Added Movie DbSet
+        public DbSet<Movie> Movies => Set<Movie>(); 
         public DbSet<Gender> Genders => Set<Gender>();
-        public DbSet<Language> Languages => Set<Language>(); // Corrected typo: Lenguaje to Language
+        public DbSet<Language> Languages => Set<Language>(); 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder); // Added call to base method
+            base.OnModelCreating(modelBuilder); 
 
             modelBuilder.Entity<Ticket>()
                 .HasKey(t => t.Codigo);
 
-            // Configure Movie entity
+          
             modelBuilder.Entity<Movie>(entity =>
             {
-                entity.ToTable("Movies");
+                entity.ToTable("Movie");
                 entity.HasKey(m => m.Id);
                 entity.Property(m => m.Id).ValueGeneratedOnAdd();
                 entity.Property(m => m.Name).IsRequired().HasMaxLength(100);
                 entity.Property(m => m.ReleaseDate).IsRequired();
                 entity.Property(m => m.Duration).IsRequired();
-                entity.Property(m => m.EndDate).IsRequired(false); // Configure EndDate as optional
+                entity.Property(m => m.EndDate).IsRequired(false); 
 
                 entity.HasOne(m => m.Language)
                     .WithMany(l => l.Movies)
@@ -46,7 +46,7 @@ namespace MyApp.Infrastructure.ApplicationDbContext
             // Configure Language entity
             modelBuilder.Entity<Language>(entity =>
             {
-                entity.ToTable("Languages");
+                entity.ToTable("Language");
                 entity.HasKey(l => l.Id);
                 entity.Property(l => l.Id).ValueGeneratedOnAdd();
                 entity.Property(l => l.Name).IsRequired().HasMaxLength(50);

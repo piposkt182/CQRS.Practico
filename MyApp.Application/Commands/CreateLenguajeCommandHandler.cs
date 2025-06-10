@@ -1,9 +1,7 @@
 using MediatR;
 using MyApp.Application.Interfaces;
 using MyApp.Domain.Entities;
-using MyApp.Application.DTOs; // For LenguajeDto
-using System.Threading;
-using System.Threading.Tasks;
+using MyApp.Application.DTOs; 
 
 namespace MyApp.Application.Commands
 {
@@ -18,7 +16,7 @@ namespace MyApp.Application.Commands
 
         public async Task<LenguajeDto> Handle(CreateLenguajeCommand request, CancellationToken cancellationToken)
         {
-            var lenguaje = new Lenguaje
+            var lenguaje = new Language
             {
                 Name = request.Name
             };

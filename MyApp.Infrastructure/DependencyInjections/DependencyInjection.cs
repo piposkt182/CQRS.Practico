@@ -56,9 +56,9 @@ namespace MyApp.Infrastructure.DependencyInjections
             services.AddTransient<MediatR.IRequestHandler<GetLenguajeByIdQuery, LenguajeDto>, GetLenguajeByIdQueryHandler>();
 
             // Movie Handlers
-            services.AddTransient<MediatR.IRequestHandler<MyApp.Application.Commands.CreateMovieCommand, int>, MyApp.Application.Handlers.CommandHandlers.CreateMovieCommandHandler>();
-            services.AddTransient<MediatR.IRequestHandler<MyApp.Application.Queries.GetAllMoviesQuery, System.Collections.Generic.IEnumerable<MyApp.Application.DTOs.MovieDto>>, MyApp.Application.Handlers.QueryHandlers.GetAllMoviesQueryHandler>();
-            services.AddTransient<MediatR.IRequestHandler<MyApp.Application.Queries.GetMovieByIdQuery, MyApp.Application.DTOs.MovieDto>, MyApp.Application.Handlers.QueryHandlers.GetMovieByIdQueryHandler>();
+            services.AddTransient<MediatR.IRequestHandler<CreateMovieCommand, int>, CreateMovieCommandHandler>();
+            services.AddTransient<MediatR.IRequestHandler<GetAllMoviesQuery, IEnumerable<MovieDto>>, GetAllMoviesQueryHandler>();
+            services.AddTransient<MediatR.IRequestHandler<GetMovieByIdQuery, MovieDto>, GetMovieByIdQueryHandler>();
 
             return services;
         }

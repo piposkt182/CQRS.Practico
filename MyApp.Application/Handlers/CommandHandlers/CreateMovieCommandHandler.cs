@@ -1,11 +1,8 @@
-using MediatR; // Added for IRequestHandler
+using MediatR;
 using MyApp.Application.Commands;
-// Removed using MyApp.Application.Interfaces; as ICommandHandler is replaced by IRequestHandler
+using MyApp.Application.Interfaces;
 using MyApp.Domain.Entities;
 using MyApp.Domain.Interfaces;
-using System;
-using System.Threading; // Added for CancellationToken
-using System.Threading.Tasks;
 
 namespace MyApp.Application.Handlers.CommandHandlers
 {
@@ -28,7 +25,7 @@ namespace MyApp.Application.Handlers.CommandHandlers
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
-        public async Task<int> HandleAsync(CreateMovieCommand command, CancellationToken cancellationToken) // Signature changed
+        public async Task<int> Handle(CreateMovieCommand command, CancellationToken cancellationToken) 
         {
             if (command == null)
             {

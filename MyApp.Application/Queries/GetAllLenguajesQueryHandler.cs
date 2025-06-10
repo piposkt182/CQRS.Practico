@@ -1,11 +1,7 @@
 using MediatR;
 using MyApp.Application.Interfaces;
 using MyApp.Application.DTOs;
-using System.Collections.Generic;
-using System.Linq; // Required for .Select
-using System.Threading;
-using System.Threading.Tasks;
-using MyApp.Domain.Entities; // Not strictly necessary here if mapping directly
+
 
 namespace MyApp.Application.Queries
 {

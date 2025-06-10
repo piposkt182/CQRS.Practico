@@ -1,6 +1,6 @@
 ﻿using MyApp.Domain.Entities;
 using MyApp.Domain.Interfaces;
-using MyApp.Infrastructure.Context;
+using MyApp.Infrastructure.ApplicationDbContext;
 
 namespace MyApp.Infrastructure.Repositories
 {

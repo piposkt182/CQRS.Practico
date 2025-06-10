@@ -1,8 +1,6 @@
 using MediatR;
 using MyApp.Application.Interfaces;
 using MyApp.Application.DTOs;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace MyApp.Application.Queries
 {

@@ -9,6 +9,7 @@ namespace MyApp.Application.Interfaces
         IProductRepository ProductRepository { get; }
         IGenderRepository GenderRepository { get; }
         ILenguajeRepository LenguajeRepository { get; }
+        IMovieRepository MovieRepository { get; }
         Task<int> SaveChangesAsync();
     }
 }
