@@ -3,7 +3,7 @@ using MyApp.Application.Interfaces;
 using MyApp.Domain.Interfaces;
 using MyApp.Infrastructure.Repositories;
 using MyApp.Application.Commands;   
-using MyApp.Application.Queries;    
+using MyApp.Application.Queries;
 using MyApp.Application.Validators; 
 using FluentValidation;
 using MyApp.Application.DTOs;
@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using MediatR; // Ensured MediatR is used
 using MyApp.Application.Handlers.CommandHandlers; // For CreateMovieCommandHandler
 using MyApp.Application.Handlers.QueryHandlers;   // For Movie Query Handlers
+using MyApp.Domain.Entities; // Added for Product entity
 
 namespace MyApp.Infrastructure.DependencyInjections
 {
@@ -20,12 +21,18 @@ namespace MyApp.Infrastructure.DependencyInjections
         {
             // AppDbContext registration removed from here, will be handled in Program.cs
             services.AddScoped<ITicketRepository, TicketRepository>();
-            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>(); // Changed from Scoped to Transient and ensures it's here
             services.AddScoped<ISaleRepository, SaleRepository>();
             services.AddScoped<IGenderRepository, GenderRepository>(); // Added
             services.AddScoped<ILanguageRepository, LanguageRepository>(); // Corrected ILenguajeRepository to ILanguageRepository
             services.AddScoped<IMovieRepository, MovieRepository>(); // Added IMovieRepository
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            // Registrations for Product
+            services.AddTransient<ICommandHandler<CreateProductCommand>, CreateProductCommandHandler>();
+            services.AddTransient<IQueryHandler<GetProductByIdQuery, Product>, GetProductByIdQueryHandler>();
+            services.AddTransient<IQueryHandler<GetAllProductsQuery, IEnumerable<Product>>, GetAllProductsQueryHandler>(); // Added
+
             return services;
         }
 
@@ -59,6 +66,10 @@ namespace MyApp.Infrastructure.DependencyInjections
             services.AddTransient<MediatR.IRequestHandler<CreateMovieCommand, int>, CreateMovieCommandHandler>();
             services.AddTransient<MediatR.IRequestHandler<GetAllMoviesQuery, IEnumerable<MovieDto>>, GetAllMoviesQueryHandler>();
             services.AddTransient<MediatR.IRequestHandler<GetMovieByIdQuery, MovieDto>, GetMovieByIdQueryHandler>();
+
+            // Add MediatR assembly scanning
+            // Using CreateProductCommandHandler from MyApp.Application assembly to scan for all handlers
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateProductCommandHandler).Assembly));
 
             return services;
         }
