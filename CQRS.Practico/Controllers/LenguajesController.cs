@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using MyApp.Application.Commands;
 using MyApp.Application.DTOs;
 using MyApp.Application.Queries;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace CQRS.Practico.Controllers
 {
@@ -27,10 +25,7 @@ namespace CQRS.Practico.Controllers
             {
                 return BadRequest(ModelState);
             }
-
             var lenguajeDto = await _mediator.Send(command);
-            // Assuming the command handler returns the DTO and Id is populated.
-            // The CreatedAtAction first argument is the action name for retrieving the resource.
             return CreatedAtAction(nameof(GetLenguajeById), new { id = lenguajeDto.Id }, lenguajeDto);
         }
 

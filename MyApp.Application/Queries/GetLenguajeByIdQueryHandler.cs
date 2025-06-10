@@ -19,11 +19,7 @@ namespace MyApp.Application.Queries
 
             if (lenguaje == null)
             {
-                // Handle not found case, could return null or throw an exception
-                // For API controllers, returning null often results in a 404 Not Found if handled correctly
-#pragma warning disable CS8603 // Possible null reference return.
                 return null;
-#pragma warning restore CS8603 // Possible null reference return.
             }
 
             return new LenguajeDto

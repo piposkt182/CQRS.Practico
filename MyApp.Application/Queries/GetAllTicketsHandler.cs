@@ -1,9 +1,9 @@
-﻿
+﻿using MediatR;
 using MyApp.Application.Interfaces;
 
 namespace MyApp.Application.Queries
 {
-    public class GetAllTicketsHandler : IQueryHandler<GetAllTicketsQuery, IEnumerable<TicketDto>>
+    public class GetAllTicketsHandler : IRequestHandler<GetAllTicketsQuery, IEnumerable<TicketDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -11,8 +11,7 @@ namespace MyApp.Application.Queries
         {
             _unitOfWork = unitOfWork;
         }
-
-        public async Task<IEnumerable<TicketDto>> HandleAsync(GetAllTicketsQuery query)
+        public async Task<IEnumerable<TicketDto>> Handle(GetAllTicketsQuery request, CancellationToken cancellationToken)
         {
             var tickets = await _unitOfWork.TicketRepository.GetAllAsync();
             return tickets.Select(t => new TicketDto(t.Codigo, t.NombreTicket));

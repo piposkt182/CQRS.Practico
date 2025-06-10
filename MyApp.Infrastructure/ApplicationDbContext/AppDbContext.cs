@@ -21,7 +21,15 @@ namespace MyApp.Infrastructure.ApplicationDbContext
             modelBuilder.Entity<Ticket>()
                 .HasKey(t => t.Codigo);
 
-          
+            modelBuilder.Entity<Product>(entity =>
+            {
+                entity.ToTable("Product");
+                entity.HasKey(m => m.Id);
+                entity.Property(m => m.Name).IsRequired().HasMaxLength(100);
+            });
+
+
+
             modelBuilder.Entity<Movie>(entity =>
             {
                 entity.ToTable("Movie");

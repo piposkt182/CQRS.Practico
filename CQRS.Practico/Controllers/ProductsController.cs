@@ -1,9 +1,9 @@
+using MediatR; // Added MediatR
 using Microsoft.AspNetCore.Mvc;
 using MyApp.Application.Commands;
 using MyApp.Application.Queries;
 using MyApp.Domain.Entities;
 using System.Threading.Tasks;
-using MediatR; // Added MediatR
 
 namespace CQRS.Practico.Controllers
 {
@@ -19,10 +19,14 @@ namespace CQRS.Practico.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CreateProductCommand command)
+        public async Task<IActionResult> CreateProduct([FromBody] CreateProductCommand command)
         {
-            await _mediator.Send(command);
-            return Ok();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+           var productCreated = await _mediator.Send(command);
+            return CreatedAtAction(nameof(Get), new { id = productCreated.Id }, productCreated);
         }
 
         [HttpGet("{id}")]

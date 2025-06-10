@@ -1,12 +1,11 @@
-using MyApp.Application.Interfaces;
+using MediatR;
+using MyApp.Application.DTOs;
 using MyApp.Application.Queries;
-using MyApp.Domain.Entities;
 using MyApp.Domain.Interfaces;
-using System.Threading.Tasks;
 
 namespace MyApp.Application.Handlers.QueryHandlers
 {
-    public class GetProductByIdQueryHandler : IQueryHandler<GetProductByIdQuery, Product>
+    public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, ProductDto>
     {
         private readonly IProductRepository _productRepository;
 
@@ -15,9 +14,18 @@ namespace MyApp.Application.Handlers.QueryHandlers
             _productRepository = productRepository;
         }
 
-        public async Task<Product> HandleAsync(GetProductByIdQuery query)
+        public async Task<ProductDto> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
         {
-            return await _productRepository.GetByIdAsync(query.Id);
+            var product = await _productRepository.GetByIdAsync(request.Id);
+            if (product == null) return null;
+
+            return new ProductDto
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price
+            };
         }
+
     }
 }

@@ -1,9 +1,10 @@
+
+using MediatR;
 using MyApp.Domain.Entities;
-using System.Collections.Generic;
 
 namespace MyApp.Application.Queries
 {
-    public class GetAllProductsQuery
+    public class GetAllProductsQuery : IRequest<IEnumerable<Product>>
     {
         // No properties needed for this query
     }
