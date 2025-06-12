@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using MyApp.Application.DTOs;
 using MyApp.Application.Interfaces;
 
 namespace MyApp.Application.Queries
@@ -14,7 +15,7 @@ namespace MyApp.Application.Queries
         public async Task<TicketDto> Handle(GetTicketByIdQuery request, CancellationToken cancellationToken)
         {
             var ticket = await _unitOfWork.TicketRepository.GetTicketByIdAsync(request.id);
-            return new TicketDto(ticket.Codigo, ticket.NombreTicket);
+            return new TicketDto(ticket.Codigo, ticket.NombreTicket, ticket.DesignTicket, ticket.Timbrado, ticket.MovieId, ticket.SaleId);
         }
     }
 }

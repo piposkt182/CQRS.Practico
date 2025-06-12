@@ -11,24 +11,38 @@ namespace MyApp.Infrastructure.ApplicationDbContext
         public DbSet<Product> Products => Set<Product>();
         public DbSet<Sale> Sales => Set<Sale>();
         public DbSet<SaleItem> SaleItems => Set<SaleItem>();
-        public DbSet<Movie> Movies => Set<Movie>(); 
+        public DbSet<Movie> Movies => Set<Movie>();
         public DbSet<Gender> Genders => Set<Gender>();
-        public DbSet<Language> Languages => Set<Language>(); 
+        public DbSet<Language> Languages => Set<Language>();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder); 
+            base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Ticket>()
-                .HasKey(t => t.Codigo);
+            modelBuilder.Entity<Ticket>(entity =>
+            {
+                entity.ToTable("Ticket");
+                entity.HasKey(t => t.Codigo);
+                entity.Property(m => m.NombreTicket).IsRequired();
+                entity.Property(m => m.DesignTicket).IsRequired();
+                entity.Property(m => m.MovieId).IsRequired();
+                entity.Property(m => m.SaleId).IsRequired();
+            });
 
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.ToTable("Product");
                 entity.HasKey(m => m.Id);
                 entity.Property(m => m.Name).IsRequired().HasMaxLength(100);
+                entity.Property(m => m.Price).HasPrecision(18, 4);
             });
 
-
+            modelBuilder.Entity<Sale>(entity =>
+            {
+                entity.ToTable("Sale");
+                entity.HasKey(m => m.Id);
+                entity.Property(m => m.Date).IsRequired();
+                entity.Property(m => m.Total).IsRequired().HasPrecision(18, 4);
+            });
 
             modelBuilder.Entity<Movie>(entity =>
             {
@@ -38,7 +52,7 @@ namespace MyApp.Infrastructure.ApplicationDbContext
                 entity.Property(m => m.Name).IsRequired().HasMaxLength(100);
                 entity.Property(m => m.ReleaseDate).IsRequired();
                 entity.Property(m => m.Duration).IsRequired();
-                entity.Property(m => m.EndDate).IsRequired(false); 
+                entity.Property(m => m.EndDate).IsRequired(false);
 
                 entity.HasOne(m => m.Language)
                     .WithMany(l => l.Movies)

@@ -1,5 +1,5 @@
 using MediatR;
-using MyApp.Application.DTOs; // For LenguajeDto if returning DTO
+using MyApp.Application.DTOs; 
 
 namespace MyApp.Application.Commands
 {

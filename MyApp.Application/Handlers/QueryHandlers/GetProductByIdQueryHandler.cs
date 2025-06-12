@@ -23,7 +23,8 @@ namespace MyApp.Application.Handlers.QueryHandlers
             {
                 Id = product.Id,
                 Name = product.Name,
-                Price = product.Price
+                Price = product.Price,
+                Stock = product.Stock
             };
         }
 

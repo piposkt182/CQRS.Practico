@@ -22,12 +22,13 @@ namespace MyApp.Application.Handlers.CommandHandlers
             var product = new Product
             {
                 Name = request.Name,
-                Price = request.Price
+                Price = request.Price,
+                Stock = request.Stock
             };
 
             await _unitOfWork.ProductRepository.AddAsync(product);
             await _unitOfWork.SaveChangesAsync();
-            return new ProductDto { Id = product.Id, Name = product.Name, Price = product.Price };
+            return new ProductDto { Id = product.Id, Name = product.Name, Price = product.Price, Stock = product.Stock };
         }
     }
 }

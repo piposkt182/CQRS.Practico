@@ -15,7 +15,7 @@ namespace MyApp.Application.Commands
 
         public async Task HandleAsync(CreateSaleCommand command)
         {
-            var sale = new Sale { Date = DateTime.UtcNow };
+            var sale = new Sale { Date = DateTime.UtcNow, Total = command.Total };
 
             foreach (var item in command.Items)
             {

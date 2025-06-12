@@ -1,5 +1,5 @@
 using MediatR;
-using MyApp.Application.Queries;
+using MyApp.Application.DTOs;
 
 namespace MyApp.Application.Interfaces
 {

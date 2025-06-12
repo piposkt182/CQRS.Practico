@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MyApp.Application.Interfaces; // Contains UpdateTicketCommand, ICommandHandler
-using MyApp.Application.Queries;  // Contains TicketDto, GetAllTicketsQuery, GetTicketByIdQuery
-// KeyNotFoundException is in System.Collections.Generic, which might be implicitly covered
-// or sometimes requires an explicit 'using System.Collections.Generic;'
-// For Exception, 'using System;' is usually present or implicitly available.
-using System; // For Exception
-using System.Collections.Generic; // For KeyNotFoundException, IEnumerable
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using MyApp.Application.DTOs;
+using MyApp.Application.Interfaces;
+
 
 namespace CQRS.Practico.Controllers
 {
@@ -13,33 +10,27 @@ namespace CQRS.Practico.Controllers
     [Route("api/[controller]")]
     public class TicketsController : ControllerBase
     {
-        private readonly IQueryHandler<GetAllTicketsQuery, IEnumerable<TicketDto>> _queryHandler;
-        private readonly IQueryHandler<GetTicketByIdQuery, TicketDto> _getTicketByIdqueryHandler;
+        private readonly IMediator _mediator;
         private readonly ICommandHandler<CreateTicketCommand> _commandHandler;
         private readonly ICommandHandler<UpdateTicketCommand> _updateCommandHandler;
-        private readonly ICommandHandler<DeleteTicketCommand> _deleteCommandHandler; // Added
-        private readonly IQueryHandler<GetTimbradoTicketsQuery, IEnumerable<TicketDto>> _getTimbradoTicketsQueryHandler;
+        private readonly ICommandHandler<DeleteTicketCommand> _deleteCommandHandler; 
 
         public TicketsController(
-            IQueryHandler<GetAllTicketsQuery, IEnumerable<TicketDto>> queryHandler,
             ICommandHandler<CreateTicketCommand> commandHandler,
-            IQueryHandler<GetTicketByIdQuery, TicketDto> getTicketByIdqueryHandler,
             ICommandHandler<UpdateTicketCommand> updateCommandHandler,
-            ICommandHandler<DeleteTicketCommand> deleteCommandHandler, // Added
-            IQueryHandler<GetTimbradoTicketsQuery, IEnumerable<TicketDto>> getTimbradoTicketsQueryHandler)
+            ICommandHandler<DeleteTicketCommand> deleteCommandHandler, 
+            IMediator mediator)
         {
-            _queryHandler = queryHandler;
             _commandHandler = commandHandler;
-            _getTicketByIdqueryHandler = getTicketByIdqueryHandler;
             _updateCommandHandler = updateCommandHandler;
-            _deleteCommandHandler = deleteCommandHandler; // Added
-            _getTimbradoTicketsQueryHandler = getTimbradoTicketsQueryHandler;
+            _deleteCommandHandler = deleteCommandHandler; 
+            _mediator = mediator;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _queryHandler.HandleAsync(new GetAllTicketsQuery());
+            var result = await _mediator.Send(new GetAllTicketsQuery());
             return Ok(result);
         }
 
@@ -48,7 +39,7 @@ namespace CQRS.Practico.Controllers
         {
             try
             {
-                var result = await _getTicketByIdqueryHandler.HandleAsync(new GetTicketByIdQuery(id));
+                var result = await _mediator.Send(new GetTicketByIdQuery(id));
                 return Ok(result);
             }
             catch (KeyNotFoundException)
@@ -121,7 +112,7 @@ namespace CQRS.Practico.Controllers
         [HttpGet("Timbrado")]
         public async Task<IActionResult> GetTimbradoTickets()
         {
-            var result = await _getTimbradoTicketsQueryHandler.HandleAsync(new GetTimbradoTicketsQuery(true));
+            var result = await _mediator.Send(new GetTimbradoTicketsQuery(true));
             return Ok(result);
         }
     }

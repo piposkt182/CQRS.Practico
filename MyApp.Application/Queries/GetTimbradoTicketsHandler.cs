@@ -1,4 +1,5 @@
 using MediatR;
+using MyApp.Application.DTOs;
 using MyApp.Application.Interfaces;
 
 namespace MyApp.Application.Queries
@@ -15,7 +16,7 @@ namespace MyApp.Application.Queries
         public async Task<IEnumerable<TicketDto>> Handle(GetTimbradoTicketsQuery request, CancellationToken cancellationToken)
         {
             var tickets = await _unitOfWork.TicketRepository.GetTicketsByTimbradoAsync(request.Timbrado);
-            return tickets.Select(t => new TicketDto(t.Codigo, t.NombreTicket));
+            return tickets.Select(t => new TicketDto(t.Codigo, t.NombreTicket, t.DesignTicket, t.Timbrado, t.MovieId, t.SaleId));
         }
 
     }

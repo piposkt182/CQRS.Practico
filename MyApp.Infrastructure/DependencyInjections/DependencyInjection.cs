@@ -34,19 +34,20 @@ namespace MyApp.Infrastructure.DependencyInjections
             // Register Validators
             services.AddTransient<IValidator<UpdateTicketCommand>, UpdateTicketCommandValidator>();
 
-            // Register Query Handlers
+           // Register Gender query handler
+            services.AddScoped<IQueryHandler<GetAllGendersQuery, IEnumerable<GenderDto>>, GetAllGendersHandler>();
+            services.AddTransient<ICommandHandler<CreateGenderCommand>, CreateGenderCommandHandler>();
+
+            // Register Ticket
+            services.AddScoped<ICommandHandler<CreateTicketCommand>, CreateTicketHandler>();
+            services.AddTransient<ICommandHandler<UpdateTicketCommand>, UpdateTicketHandler>(); 
+            services.AddTransient<ICommandHandler<DeleteTicketCommand>, DeleteTicketCommandHandler>();
             services.AddScoped<IRequestHandler<GetAllTicketsQuery, IEnumerable<TicketDto>>, GetAllTicketsHandler>();
             services.AddTransient<IRequestHandler<GetTicketByIdQuery, TicketDto>, GetTicketByIdHandler>();
             services.AddTransient<IRequestHandler<GetTimbradoTicketsQuery, IEnumerable<TicketDto>>, GetTimbradoTicketsHandler>();
-            // Add this line for the new gender query handler
-            services.AddScoped<IQueryHandler<GetAllGendersQuery, IEnumerable<GenderDto>>, GetAllGendersHandler>();
 
-            // Register Command Handlers
-            services.AddScoped<ICommandHandler<CreateTicketCommand>, CreateTicketHandler>();
-            services.AddTransient<ICommandHandler<UpdateTicketCommand>, UpdateTicketHandler>(); 
+            //Register Sale
             services.AddScoped<ICommandHandler<CreateSaleCommand>, CreateSaleHandler>();
-            services.AddTransient<ICommandHandler<DeleteTicketCommand>, DeleteTicketCommandHandler>();
-            services.AddTransient<ICommandHandler<CreateGenderCommand>, CreateGenderCommandHandler>(); 
 
             // MediatR style Handlers for Lenguaje (assuming MediatR will be fully integrated)
             services.AddTransient<MediatR.IRequestHandler<CreateLenguajeCommand, LenguajeDto>, CreateLenguajeCommandHandler>();

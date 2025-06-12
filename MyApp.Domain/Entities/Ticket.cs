@@ -1,16 +1,14 @@
 ﻿
-using System.ComponentModel.DataAnnotations.Schema;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
 namespace MyApp.Domain.Entities
 {
-    [Table("Ticket", Schema = "dbo")]
     public class Ticket
     {
         public int Codigo { get; private set; }
         public string NombreTicket { get; set; }
         public string DesignTicket { get; set; }
         public bool Timbrado { get; set; }
+        public int MovieId { get; private set; }
+        public int SaleId { get; private set; }
 
         private Ticket() { }
 
