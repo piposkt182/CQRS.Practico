@@ -22,17 +22,13 @@ namespace MyApp.Application.Commands
             };
 
             await _unitOfWork.LenguajeRepository.AddAsync(lenguaje);
-            await _unitOfWork.SaveChangesAsync(); // Persist changes
+            await _unitOfWork.SaveChangesAsync(); 
 
-            // Return DTO
             return new LenguajeDto
             {
                 Id = lenguaje.Id,
                 Nombre = lenguaje.Name
             };
-
-            // Or if returning Id:
-            // return lenguaje.Id;
         }
     }
 }

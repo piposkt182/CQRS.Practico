@@ -11,5 +11,8 @@ namespace MyApp.Application.Interfaces
         ILenguajeRepository LenguajeRepository { get; }
         IMovieRepository MovieRepository { get; }
         Task<int> SaveChangesAsync();
+        Task BeginTransactionAsync();
+        Task RollbackAsync();
+        Task CommitAsync();
     }
 }

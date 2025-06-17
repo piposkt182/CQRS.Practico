@@ -26,6 +26,11 @@ namespace MyApp.Infrastructure.Repositories
             return await _context.Products.ToListAsync();
         }
 
+        public async Task<IEnumerable<Product>> GetListByIds(List<int> ids)
+        {
+            return await _context.Products.Where(p => ids.Contains(p.Id)).ToListAsync();
+        }
+
         public async Task AddAsync(Product product)
         {
             await _context.Products.AddAsync(product);

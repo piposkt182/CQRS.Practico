@@ -1,6 +1,4 @@
 using MyApp.Domain.Entities;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace MyApp.Domain.Interfaces
 {
@@ -11,5 +9,6 @@ namespace MyApp.Domain.Interfaces
         Task AddAsync(Product product);
         Task UpdateAsync(Product product);
         Task DeleteAsync(int id);
+        Task<IEnumerable<Product>> GetListByIds(List<int> ids);
     }
 }

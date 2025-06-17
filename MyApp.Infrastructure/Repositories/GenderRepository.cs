@@ -2,8 +2,6 @@ using MyApp.Domain.Entities;
 using MyApp.Domain.Interfaces;
 using MyApp.Infrastructure.ApplicationDbContext; // Corrected namespace
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace MyApp.Infrastructure.Repositories
 {

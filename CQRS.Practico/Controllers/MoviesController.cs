@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using MyApp.Application.Commands;
 using MyApp.Application.DTOs;
 using MyApp.Application.Queries;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace CQRS.Practico.Controllers
 {

@@ -41,6 +41,17 @@ namespace MyApp.Domain.Entities
                 return this;
             }
 
+            public TicketBuilder WithSaleId(int saleid)
+            {
+                _ticket.SaleId = saleid;
+                return this;
+            }
+
+            public TicketBuilder WithMovieId(int Movieid)
+            {
+                _ticket.MovieId = Movieid;
+                return this;
+            }
             public Ticket Build()
             {
                 if(_ticket.Codigo == null || _ticket.Codigo == 0)

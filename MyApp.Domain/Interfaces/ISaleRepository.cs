@@ -4,6 +4,6 @@ namespace MyApp.Domain.Interfaces
 {
     public interface ISaleRepository
     {
-        void Add(Sale sale);
+        Task Add(Sale sale);
     }
 }

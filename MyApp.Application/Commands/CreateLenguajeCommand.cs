@@ -3,7 +3,7 @@ using MyApp.Application.DTOs;
 
 namespace MyApp.Application.Commands
 {
-    public class CreateLenguajeCommand : IRequest<LenguajeDto> // Or IRequest<int> if returning Id
+    public class CreateLenguajeCommand : IRequest<LenguajeDto>
     {
         public string Name { get; set; }
     }

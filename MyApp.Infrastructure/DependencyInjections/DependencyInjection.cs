@@ -45,11 +45,12 @@ namespace MyApp.Infrastructure.DependencyInjections
             services.AddScoped<IRequestHandler<GetAllTicketsQuery, IEnumerable<TicketDto>>, GetAllTicketsHandler>();
             services.AddTransient<IRequestHandler<GetTicketByIdQuery, TicketDto>, GetTicketByIdHandler>();
             services.AddTransient<IRequestHandler<GetTimbradoTicketsQuery, IEnumerable<TicketDto>>, GetTimbradoTicketsHandler>();
+            services.AddTransient<IRequestHandler<CreateFunctionMovieCommand, BuyDto>, CreateFunctionMovieHandler>();
 
-            //Register Sale
+            //  Sale
             services.AddScoped<ICommandHandler<CreateSaleCommand>, CreateSaleHandler>();
 
-            // MediatR style Handlers for Lenguaje (assuming MediatR will be fully integrated)
+            // Lenguaje 
             services.AddTransient<MediatR.IRequestHandler<CreateLenguajeCommand, LenguajeDto>, CreateLenguajeCommandHandler>();
             services.AddTransient<MediatR.IRequestHandler<GetAllLenguajesQuery, IEnumerable<LenguajeDto>>, GetAllLenguajesQueryHandler>();
             services.AddTransient<MediatR.IRequestHandler<GetLenguajeByIdQuery, LenguajeDto>, GetLenguajeByIdQueryHandler>();

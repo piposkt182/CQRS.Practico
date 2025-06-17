@@ -4,7 +4,6 @@ using MyApp.Application.DTOs;
 using MyApp.Application.Interfaces;
 using MyApp.Domain.Entities;
 using MyApp.Domain.Interfaces;
-using System.Threading.Tasks;
 
 namespace MyApp.Application.Handlers.CommandHandlers
 {

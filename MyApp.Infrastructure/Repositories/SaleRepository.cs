@@ -13,7 +13,7 @@ namespace MyApp.Infrastructure.Repositories
             _context = context;
         }
 
-        public void Add(Sale sale)
+        public async Task Add(Sale sale)
         {
             _context.Sales.Add(sale);
         }

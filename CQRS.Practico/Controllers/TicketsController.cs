@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using MyApp.Application.Commands;
 using MyApp.Application.DTOs;
 using MyApp.Application.Interfaces;
 
@@ -113,6 +114,13 @@ namespace CQRS.Practico.Controllers
         public async Task<IActionResult> GetTimbradoTickets()
         {
             var result = await _mediator.Send(new GetTimbradoTicketsQuery(true));
+            return Ok(result);
+        }
+
+        [HttpPost("CreateFunctionMovie")]
+        public async Task<IActionResult> CreateFunctionMovie([FromBody] CreateFunctionMovieCommand command)
+        {
+            var result = await _mediator.Send(command);
             return Ok(result);
         }
     }

@@ -1,10 +1,4 @@
 using MyApp.Application.Interfaces; // For UpdateTicketCommand, ICommandHandler, IUnitOfWork
-using MyApp.Domain.Entities;      // For Ticket
-using MyApp.Domain.Interfaces;    // For ITicketRepository (though accessed via IUnitOfWork)
-using System;                     // For ArgumentNullException
-using System.Collections.Generic; // For KeyNotFoundException
-using System.Threading;           // For CancellationToken (if it were used)
-using System.Threading.Tasks;     // For Task
 
 namespace MyApp.Application.Commands
 {
