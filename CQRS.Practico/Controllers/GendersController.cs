@@ -1,10 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using MyApp.Application.Commands; 
-using MyApp.Application.DTOs; // Add this using directive
+using MyApp.Application.DTOs;
 using MyApp.Application.Interfaces; 
-using MyApp.Application.Queries; // Add this using directive
-using System.Collections.Generic; // Add this using directive
-using System.Threading.Tasks;
+using MyApp.Application.Queries;
 
 namespace CQRS.Practico.Controllers
 {
@@ -32,8 +30,6 @@ namespace CQRS.Practico.Controllers
                 return BadRequest("Command cannot be null.");
             }
 
-            // Basic validation example, more complex validation can be added
-            // using FluentValidation or DataAnnotations on the CreateGenderCommand class.
             if (string.IsNullOrWhiteSpace(command.Name))
             {
                 ModelState.AddModelError(nameof(command.Name), "Gender name cannot be empty.");
@@ -47,22 +43,14 @@ namespace CQRS.Practico.Controllers
             try
             {
                 await _createGenderCommandHandler.HandleAsync(command);
-                // Typically, for a POST that creates a resource, you might return CreatedAtAction or CreatedAtRoute
-                // with a URI to the newly created resource and the resource itself or its ID.
-                // Since the ID is database-generated and not immediately available from the command handler (unless modified to return it),
-                // returning NoContent is a simpler approach.
-                // If the ID needs to be returned, the command handler and ICommand interface would need adjustment.
                 return NoContent();
             }
             catch (System.Exception ex)
             {
-                // Log the exception (not implemented here)
-                // Consider specific exception types if your handler can throw them
                 return StatusCode(500, $"An error occurred: {ex.Message}");
             }
         }
 
-        // Add this new GET method
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -74,7 +62,6 @@ namespace CQRS.Practico.Controllers
             }
             catch (System.Exception ex)
             {
-                // Log the exception (not implemented here)
                 return StatusCode(500, $"An error occurred: {ex.Message}");
             }
         }

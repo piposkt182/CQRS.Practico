@@ -45,17 +45,13 @@ namespace CQRS.Practico.Controllers
         [HttpPost]
         public async Task<ActionResult<MovieDto>> CreateMovie(CreateMovieCommand command)
         {
-            // Assuming CreateMovieCommandHandler returns the ID of the newly created movie (int)
             var movieId = await _mediator.Send(command);
 
-            // Fetch the created movie DTO to return in the response
             var movieDto = await _mediator.Send(new GetMovieByIdQuery(movieId));
 
             if (movieDto == null)
             {
-                // This case should ideally not be reached if command execution was successful
-                // and the ID returned is valid. It might indicate an issue with GetMovieByIdQuery
-                // or data consistency. For robustness, handle it.
+            
                 return Problem(detail: "Movie created but could not be retrieved.", statusCode: 500);
             }
 

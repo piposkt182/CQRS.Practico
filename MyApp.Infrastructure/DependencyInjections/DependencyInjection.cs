@@ -69,6 +69,7 @@ namespace MyApp.Infrastructure.DependencyInjections
             //User
             services.AddTransient<IRequestHandler<CreateUserCommand, UserDto>, CreateUserHandler>();
             services.AddTransient<IRequestHandler<GetUserByIdQuery, UserDto>, GetUserByIdHandler>();
+            services.AddTransient<IRequestHandler<AddTicketToUserCommand, TicketToUserDto>, AddTicketToUserHandler>();
             
             return services;
         }

@@ -6,5 +6,6 @@ namespace MyApp.Domain.Interfaces
     {
         Task CreateUserAsync(User user);
         Task<User> GetUserById(int id);
+        Task UpdateUser(User user);
     }
 }

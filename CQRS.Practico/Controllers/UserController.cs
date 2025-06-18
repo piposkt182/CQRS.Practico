@@ -1,5 +1,4 @@
-﻿using Azure.Core;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MyApp.Application.Commands;
 using MyApp.Application.Queries;
@@ -34,6 +33,16 @@ namespace CQRS.Practico.Controllers
             var query = new GetUserByIdQuery(id);
             var user = await _mediator.Send(query);
             return Ok(user);
+        }
+
+        [HttpPost("AddTicketToUser")]
+        public async Task<IActionResult> AddTicketToUser([FromBody] AddTicketToUserCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var userWithTicket = await _mediator.Send(command);
+            return Ok(userWithTicket);
         }
     }
 }

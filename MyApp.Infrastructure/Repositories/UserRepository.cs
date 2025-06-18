@@ -17,6 +17,11 @@ namespace MyApp.Infrastructure.Repositories
              await _context.Users.AddAsync(user);   
         }
 
+        public async Task UpdateUser(User user)
+        {
+            _context.Users.Update(user);
+        }
+
         public async Task<User> GetUserById(int id) => await _context.Users.FindAsync(id);
     }
 }
