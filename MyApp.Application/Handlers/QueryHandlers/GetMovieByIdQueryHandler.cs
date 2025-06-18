@@ -24,10 +24,7 @@ namespace MyApp.Application.Handlers.QueryHandlers
             var movie = await _unitOfWork.MovieRepository.GetByIdAsync(request.Id);
 
             if (movie == null)
-            {
-                return null;
-
-            }
+                throw new KeyNotFoundException($"Movie with Id {request.Id} not found.");
 
             return new MovieDto
             {

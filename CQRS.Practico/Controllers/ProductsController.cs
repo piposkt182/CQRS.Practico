@@ -1,9 +1,7 @@
-using MediatR; // Added MediatR
+using MediatR; 
 using Microsoft.AspNetCore.Mvc;
 using MyApp.Application.Commands;
 using MyApp.Application.Queries;
-using MyApp.Domain.Entities;
-using System.Threading.Tasks;
 
 namespace CQRS.Practico.Controllers
 {
@@ -46,6 +44,13 @@ namespace CQRS.Practico.Controllers
         {
             var query = new GetAllProductsQuery();
             var products = await _mediator.Send(query);
+            return Ok(products);
+        }
+
+        [HttpPut(Name = "UpdateStock")]
+        public async Task<IActionResult> UpdateStock([FromBody] UpdateProductStockCommand command)
+        {
+            var products = await _mediator.Send(command);
             return Ok(products);
         }
     }

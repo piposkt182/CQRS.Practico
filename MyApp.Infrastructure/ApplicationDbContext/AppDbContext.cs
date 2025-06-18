@@ -14,6 +14,7 @@ namespace MyApp.Infrastructure.ApplicationDbContext
         public DbSet<Movie> Movies => Set<Movie>();
         public DbSet<Gender> Genders => Set<Gender>();
         public DbSet<Language> Languages => Set<Language>();
+        public DbSet<User> Users => Set<User>();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -26,6 +27,16 @@ namespace MyApp.Infrastructure.ApplicationDbContext
                 entity.Property(m => m.DesignTicket).IsRequired();
                 entity.Property(m => m.MovieId).IsRequired();
                 entity.Property(m => m.SaleId).IsRequired();
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.ToTable("User");
+                entity.HasKey(t => t.Id);
+                entity.Property(m => m.Name).IsRequired();
+                entity.Property(m => m.LastName).IsRequired();
+                entity.Property(m => m.Email).IsRequired();
+                entity.Property(m => m.TicketId);
             });
 
             modelBuilder.Entity<Product>(entity =>

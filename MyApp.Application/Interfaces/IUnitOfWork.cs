@@ -10,6 +10,7 @@ namespace MyApp.Application.Interfaces
         IGenderRepository GenderRepository { get; }
         ILenguajeRepository LenguajeRepository { get; }
         IMovieRepository MovieRepository { get; }
+        IUSerRepository USerRepository { get; }
         Task<int> SaveChangesAsync();
         Task BeginTransactionAsync();
         Task RollbackAsync();

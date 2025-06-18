@@ -60,10 +60,15 @@ namespace MyApp.Infrastructure.DependencyInjections
             services.AddTransient<MediatR.IRequestHandler<GetAllMoviesQuery, IEnumerable<MovieDto>>, GetAllMoviesQueryHandler>();
             services.AddTransient<MediatR.IRequestHandler<GetMovieByIdQuery, MovieDto>, GetMovieByIdQueryHandler>();
 
-            // Registrations for Product
+            //Product
             services.AddTransient<IRequestHandler<CreateProductCommand, ProductDto>, CreateProductCommandHandler>();
             services.AddTransient<IRequestHandler<GetProductByIdQuery, ProductDto>, GetProductByIdQueryHandler>();
             services.AddTransient<IRequestHandler<GetAllProductsQuery, IEnumerable<Product>>, GetAllProductsQueryHandler>();
+            services.AddTransient<IRequestHandler<UpdateProductStockCommand, ProductDto>, UpdateProductStockHandler>();
+
+            //User
+            services.AddTransient<IRequestHandler<CreateUserCommand, UserDto>, CreateUserHandler>();
+            services.AddTransient<IRequestHandler<GetUserByIdQuery, UserDto>, GetUserByIdHandler>();
             
             return services;
         }

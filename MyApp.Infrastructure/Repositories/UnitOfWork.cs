@@ -13,7 +13,8 @@ namespace MyApp.Infrastructure.Repositories
         private IGenderRepository _genderRepository;
         private ILenguajeRepository _lenguajeRepository;
         private IMovieRepository _movieRepository;
-        // Add other private repository fields here if converting others to lazy load
+        private IProductRepository _productRepository;
+        private IUSerRepository _userRepository;
 
         public UnitOfWork(AppDbContext context)
         {
@@ -23,9 +24,10 @@ namespace MyApp.Infrastructure.Repositories
         public IGenderRepository GenderRepository => _genderRepository ??= new GenderRepository(_context);
         public ILenguajeRepository LenguajeRepository => _lenguajeRepository ??= new LenguajeRepository(_context);
         public ITicketRepository TicketRepository => new TicketRepository(_context); 
-        public IProductRepository ProductRepository => new ProductRepository(_context); 
+        public IProductRepository ProductRepository => _productRepository ??= new ProductRepository(_context); 
         public ISaleRepository SaleRepository => new SaleRepository(_context); 
         public IMovieRepository MovieRepository => _movieRepository ??= new MovieRepository(_context);
+        public IUSerRepository USerRepository => _userRepository ??= new UserRepository(_context);
 
         public async Task<int> SaveChangesAsync()
         {
